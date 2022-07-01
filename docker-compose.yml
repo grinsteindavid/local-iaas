@@ -6,6 +6,7 @@ services:
     image: hashicorp/terraform
     volumes:
       - "./terraform:/"
+    network_mode: bridge
   localstack:
     container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
     image: localstack/localstack
