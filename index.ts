@@ -12,7 +12,7 @@ enum Protocols {
     SSH = "SSH",
 }
 
-const ingress: {
+const ProtocolRules: {
   [key in Protocols]: aws.types.input.ec2.SecurityGroupIngress;
 } = {
   SSH: { protocol: "tcp", fromPort: 22, toPort: 22, cidrBlocks: ["0.0.0.0/0"] },
@@ -31,11 +31,12 @@ const ingress: {
 };
 
 const devSecurityGroup = new aws.ec2.SecurityGroup("dev-ssh", {
-  ingress: [ingress.SSH],
+  ingress: [ProtocolRules.SSH],
 });
 
 const WebSecurityGroup = new aws.ec2.SecurityGroup("web-service", {
-  ingress: [ingress.HTTP, ingress.HTTPS],
+  ingress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
+  egress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
 });
 
 const ami = aws.getAmiOutput({
@@ -45,10 +46,10 @@ const ami = aws.getAmiOutput({
 });
 
 const targetGroup = new aws.lb.TargetGroup("main-tg", {
-    port: 80,
-    protocol: "HTTP",
-    vpcId: mainVPC.id,
-    targetType: "instance"
+  port: 80,
+  protocol: "HTTP",
+  vpcId: mainVPC.id,
+  targetType: "instance",
 });
 
 const loadBalancer = new awsx.lb.ApplicationLoadBalancer("web-traffic", {
@@ -59,9 +60,16 @@ const listener = loadBalancer.createListener("web-listener", { port: 80 });
 
 const primaryZone = new aws.route53.Zone("primary");
 
-const www = new aws.route53.Record("www", {
+const wwwSubdomain = new aws.route53.Record("wwwSubdomain", {
   zoneId: primaryZone.id,
   name: "www.example.com",
+  type: "A",
+  records: [listener.endpoint.hostname],
+});
+
+const Maindomain = new aws.route53.Record("Maindomain", {
+  zoneId: primaryZone.id,
+  name: "example.com",
   type: "A",
   records: [listener.endpoint.hostname],
 });
