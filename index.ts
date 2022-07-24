@@ -51,10 +51,19 @@ const targetGroup = new aws.lb.TargetGroup("main-tg", {
     targetType: "instance"
 });
 
-const loadBalancer = new aws.lb.LoadBalancer("main-lb", {
-  internal: false,
-  loadBalancerType: "application",
+const loadBalancer = new awsx.lb.ApplicationLoadBalancer("web-traffic", {
   securityGroups: [WebSecurityGroup.id],
+});
+
+const listener = loadBalancer.createListener("web-listener", { port: 80 });
+
+const primaryZone = new aws.route53.Zone("primary");
+
+const www = new aws.route53.Record("www", {
+  zoneId: primaryZone.id,
+  name: "www.example.com",
+  type: "A",
+  records: [listener.endpoint.hostname],
 });
 
 const server = new aws.ec2.Instance("main-server", {
@@ -63,6 +72,12 @@ const server = new aws.ec2.Instance("main-server", {
   ami: ami.id,
   vpcSecurityGroupIds: [WebSecurityGroup.id],
 });
+
+const tgAttachment = new aws.lb.TargetGroupAttachment("", {
+  targetGroupArn: targetGroup.arn,
+  targetId: server.arn,
+});
+
 
 
 // // Create an AWS resource (S3 Bucket)
