@@ -7,9 +7,10 @@ const mainVPC = new aws.ec2.Vpc("main", {
 });
 
 enum Protocols {
-    HTTP = "HTTP",
-    HTTPS = "HTTPS",
-    SSH = "SSH",
+  HTTP = "HTTP",
+  HTTPS = "HTTPS",
+  SSH = "SSH",
+  HEALTH_CHECK = "HEALTH_CHECK",
 }
 
 const ProtocolRules: {
@@ -28,6 +29,12 @@ const ProtocolRules: {
     toPort: 443,
     cidrBlocks: ["0.0.0.0/0"],
   },
+  HEALTH_CHECK: {
+    protocol: "-1",
+    fromPort: 0,
+    toPort: 0,
+    cidrBlocks: ["0.0.0.0/0"],
+  },
 };
 
 const devSecurityGroup = new aws.ec2.SecurityGroup("dev-ssh", {
@@ -39,18 +46,24 @@ const WebSecurityGroup = new aws.ec2.SecurityGroup("web-service", {
   egress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
 });
 
-const ami = aws.getAmiOutput({
-  filters: [{ name: "name", values: ["amzn-ami-hvm-*"] }],
-  owners: ["137112412989"],
+const ubuntu14 = aws.getAmiOutput({
+  filters: [
+    {
+      name: "name",
+      values: ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"],
+    },
+    { name: "virtualization-type", values: ["hvm"] },
+  ],
   mostRecent: true,
+  owners: ["099720109477"], // Canonical
 });
 
-const targetGroup = new aws.lb.TargetGroup("main-tg", {
-  port: 80,
-  protocol: "HTTP",
-  vpcId: mainVPC.id,
-  targetType: "instance",
-});
+// const targetGroup = new aws.lb.TargetGroup("main-tg", {
+//   port: 80,
+//   protocol: "HTTP",
+//   vpcId: mainVPC.id,
+//   targetType: "instance",
+// });
 
 const loadBalancer = new awsx.lb.ApplicationLoadBalancer("web-traffic", {
   securityGroups: [WebSecurityGroup.id],
@@ -74,19 +87,28 @@ const Maindomain = new aws.route53.Record("Maindomain", {
   records: [listener.endpoint.hostname],
 });
 
-const server = new aws.ec2.Instance("main-server", {
+const mainServer = new aws.ec2.Instance("main-server", {
   instanceType: "t2.micro",
   tags: { name: "main-server" },
-  ami: ami.id,
+  ami: ubuntu14.id,
   vpcSecurityGroupIds: [WebSecurityGroup.id],
 });
 
-const tgAttachment = new aws.lb.TargetGroupAttachment("", {
-  targetGroupArn: targetGroup.arn,
-  targetId: server.arn,
+const secondaryServer = new aws.ec2.Instance("secondary-server", {
+  instanceType: "t2.micro",
+  tags: { name: "main-server" },
+  ami: ubuntu14.id,
+  vpcSecurityGroupIds: [WebSecurityGroup.id],
 });
 
+listener.attachTarget("main-server", mainServer);
+listener.attachTarget("main-server", secondaryServer);
 
+
+// const tgAttachment = new aws.lb.TargetGroupAttachment("", {
+//   targetGroupArn: targetGroup.arn,
+//   targetId: mainServer.arn,
+// });
 
 // // Create an AWS resource (S3 Bucket)
 // const bucket = new aws.s3.Bucket("my-bucket");
