@@ -1,0 +1,8 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "yaml.schemas": {
+        "https://json.schemastore.org/yamllint.json": "file:///home/looper/playground/local-iaas-dev/Pulumi.dev.yaml"
+    }
+}
