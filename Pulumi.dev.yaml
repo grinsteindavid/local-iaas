@@ -11,7 +11,7 @@ config:
       - s3control: http://localhost:4566
       - s3outposts: http://localhost:4566
       # accessanalyzer: http://localhost:4566
-      # account: http://localhost:4566
+      - account: http://localhost:4566
       # acm: http://localhost:4566
       # acmpca: http://localhost:4566
       # alexaforbusiness: http://localhost:4566
@@ -27,13 +27,13 @@ config:
       # appintegrationsservice: http://localhost:4566
       # applicationautoscaling: http://localhost:4566
       # applicationcostprofiler: http://localhost:4566
-      # applicationdiscovery: http://localhost:4566
-      # applicationdiscoveryservice: http://localhost:4566
+      - applicationdiscovery: http://localhost:4566
+      - applicationdiscoveryservice: http://localhost:4566
       # applicationinsights: http://localhost:4566
       # appmesh: http://localhost:4566
       # appregistry: http://localhost:4566
-      # apprunner: http://localhost:4566
-      # appstream: http://localhost:4566
+      - apprunner: http://localhost:4566
+      - appstream: http://localhost:4566
       # appsync: http://localhost:4566
       # athena: http://localhost:4566
       # auditmanager: http://localhost:4566
@@ -41,7 +41,7 @@ config:
       - autoscaling: http://localhost:4566
       - autoscalingplans: http://localhost:4566
       - backup: http://localhost:4566
-      # batch: http://localhost:4566
+      - batch: http://localhost:4566
       # braket: http://localhost:4566
       - budgets: http://localhost:4566
       # chime: http://localhost:4566
@@ -53,7 +53,7 @@ config:
       - cloudfront: http://localhost:4566
       # cloudhsm: http://localhost:4566
       # cloudhsmv2: http://localhost:4566
-      # cloudsearch: http://localhost:4566
+      - cloudsearch: http://localhost:4566
       # cloudsearchdomain: http://localhost:4566
       # cloudtrail: http://localhost:4566
       - cloudwatch: http://localhost:4566
@@ -75,8 +75,8 @@ config:
       # cognitosync: http://localhost:4566
       # comprehend: http://localhost:4566
       # comprehendmedical: http://localhost:4566
-      # config: http://localhost:4566
-      # configservice: http://localhost:4566
+      - config: http://localhost:4566
+      - configservice: http://localhost:4566
       - connect: http://localhost:4566
       # connectcontactlens: http://localhost:4566
       # connectparticipant: http://localhost:4566
@@ -118,7 +118,7 @@ config:
       # emrcontainers: http://localhost:4566
       # es: http://localhost:4566
       # eventbridge: http://localhost:4566
-      # events: http://localhost:4566
+      - events: http://localhost:4566
       # finspace: http://localhost:4566
       # finspacedata: http://localhost:4566
       # firehose: http://localhost:4566
@@ -221,9 +221,9 @@ config:
       # opsworkscm: http://localhost:4566
       # organizations: http://localhost:4566
       # outposts: http://localhost:4566
-      # personalize: http://localhost:4566
-      # personalizeevents: http://localhost:4566
-      # personalizeruntime: http://localhost:4566
+      - personalize: http://localhost:4566
+      - personalizeevents: http://localhost:4566
+      - personalizeruntime: http://localhost:4566
       # pi: http://localhost:4566
       # pinpoint: http://localhost:4566
       # pinpointemail: http://localhost:4566
@@ -275,8 +275,8 @@ config:
       # simpledb: http://localhost:4566
       # sms: http://localhost:4566
       # snowball: http://localhost:4566
-      # sns: http://localhost:4566
-      # sqs: http://localhost:4566
+      - sns: http://localhost:4566
+      - sqs: http://localhost:4566
       # ssm: http://localhost:4566
       # ssmcontacts: http://localhost:4566
       # ssmincidents: http://localhost:4566
@@ -286,7 +286,7 @@ config:
       # stepfunctions: http://localhost:4566
       # storagegateway: http://localhost:4566
       # sts: http://localhost:4566
-      # support: http://localhost:4566
+      - support: http://localhost:4566
       # swf: http://localhost:4566
       # synthetics: http://localhost:4566
       # textract: http://localhost:4566
@@ -306,5 +306,5 @@ config:
       # worklink: http://localhost:4566
       # workmail: http://localhost:4566
       # workmailmessageflow: http://localhost:4566
-      # workspaces: http://localhost:4566
+      - workspaces: http://localhost:4566
       # xray: http://localhost:4566
