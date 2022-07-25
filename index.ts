@@ -43,7 +43,7 @@ const devSecurityGroup = new aws.ec2.SecurityGroup("dev-ssh", {
 
 const WebSecurityGroup = new aws.ec2.SecurityGroup("web-service", {
   ingress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
-  egress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
+  egress: [ProtocolRules.HEALTH_CHECK],
 });
 
 const ubuntu14 = aws.getAmiOutput({
@@ -67,6 +67,7 @@ const ubuntu14 = aws.getAmiOutput({
 
 const loadBalancer = new awsx.lb.ApplicationLoadBalancer("web-traffic", {
   securityGroups: [WebSecurityGroup.id],
+  vpc: awsx.ec2.Vpc.getDefault(),
 });
 
 const listener = loadBalancer.createListener("web-listener", { port: 80 });
@@ -102,7 +103,7 @@ const secondaryServer = new aws.ec2.Instance("secondary-server", {
 });
 
 listener.attachTarget("main-server", mainServer);
-listener.attachTarget("main-server", secondaryServer);
+listener.attachTarget("secondary-server", secondaryServer);
 
 
 // const tgAttachment = new aws.lb.TargetGroupAttachment("", {

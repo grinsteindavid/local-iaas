@@ -19,10 +19,10 @@ config:
       # amp: http://localhost:4566
       # amplify: http://localhost:4566
       # amplifybackend: http://localhost:4566
-      # apigateway: http://localhost:4566
+      - apigateway: http://localhost:4566
       # apigatewayv2: http://localhost:4566
-      # appautoscaling: http://localhost:4566
-      # appconfig: http://localhost:4566
+      - appautoscaling: http://localhost:4566
+      - appconfig: http://localhost:4566
       # appflow: http://localhost:4566
       # appintegrations: http://localhost:4566
       # appintegrationsservice: http://localhost:4566
@@ -39,27 +39,27 @@ config:
       # athena: http://localhost:4566
       # auditmanager: http://localhost:4566
       # augmentedairuntime: http://localhost:4566
-      # autoscaling: http://localhost:4566
-      # autoscalingplans: http://localhost:4566
-      # backup: http://localhost:4566
+      - autoscaling: http://localhost:4566
+      - autoscalingplans: http://localhost:4566
+      - backup: http://localhost:4566
       # batch: http://localhost:4566
       # braket: http://localhost:4566
-      # budgets: http://localhost:4566
+      - budgets: http://localhost:4566
       # chime: http://localhost:4566
       # cloud9: http://localhost:4566
       # cloudcontrol: http://localhost:4566
       # cloudcontrolapi: http://localhost:4566
       # clouddirectory: http://localhost:4566
-      # cloudformation: http://localhost:4566
-      # cloudfront: http://localhost:4566
+      - cloudformation: http://localhost:4566
+      - cloudfront: http://localhost:4566
       # cloudhsm: http://localhost:4566
       # cloudhsmv2: http://localhost:4566
       # cloudsearch: http://localhost:4566
       # cloudsearchdomain: http://localhost:4566
       # cloudtrail: http://localhost:4566
-      # cloudwatch: http://localhost:4566
-      # cloudwatchevents: http://localhost:4566
-      # cloudwatchlogs: http://localhost:4566
+      - cloudwatch: http://localhost:4566
+      - cloudwatchevents: http://localhost:4566
+      - cloudwatchlogs: http://localhost:4566
       # codeartifact: http://localhost:4566
       # codebuild: http://localhost:4566
       # codecommit: http://localhost:4566
@@ -78,7 +78,7 @@ config:
       # comprehendmedical: http://localhost:4566
       # config: http://localhost:4566
       # configservice: http://localhost:4566
-      # connect: http://localhost:4566
+      - connect: http://localhost:4566
       # connectcontactlens: http://localhost:4566
       # connectparticipant: http://localhost:4566
       # costandusagereportservice: http://localhost:4566
@@ -100,20 +100,20 @@ config:
       # ds: http://localhost:4566
       # dynamodb: http://localhost:4566
       # dynamodbstreams: http://localhost:4566
-      # ec2: http://localhost:4566
-      # ec2instanceconnect: http://localhost:4566
-      # ecr: http://localhost:4566
+      - ec2: http://localhost:4566
+      - ec2instanceconnect: http://localhost:4566
+      - ecr: http://localhost:4566
       # ecrpublic: http://localhost:4566
-      # ecs: http://localhost:4566
+      - ecs: http://localhost:4566
       # efs: http://localhost:4566
-      # eks: http://localhost:4566
+      - eks: http://localhost:4566
       # elasticache: http://localhost:4566
       # elasticbeanstalk: http://localhost:4566
       # elasticinference: http://localhost:4566
       # elasticsearch: http://localhost:4566
       # elasticsearchservice: http://localhost:4566
       # elastictranscoder: http://localhost:4566
-      # elb: http://localhost:4566
+      - elb: http://localhost:4566
       # elbv2: http://localhost:4566
       # emr: http://localhost:4566
       # emrcontainers: http://localhost:4566
@@ -140,10 +140,10 @@ config:
       # greengrassv2: http://localhost:4566
       # groundstation: http://localhost:4566
       # guardduty: http://localhost:4566
-      # health: http://localhost:4566
-      # healthlake: http://localhost:4566
-      # honeycode: http://localhost:4566
-      # iam: http://localhost:4566
+      - health: http://localhost:4566
+      - healthlake: http://localhost:4566
+      - honeycode: http://localhost:4566
+      - iam: http://localhost:4566
       # identitystore: http://localhost:4566
       # imagebuilder: http://localhost:4566
       # inspector: http://localhost:4566
@@ -184,7 +184,7 @@ config:
       # lexruntimev2: http://localhost:4566
       # licensemanager: http://localhost:4566
       # lightsail: http://localhost:4566
-      # location: http://localhost:4566
+      - location: http://localhost:4566
       # lookoutequipment: http://localhost:4566
       # lookoutforvision: http://localhost:4566
       # lookoutmetrics: http://localhost:4566
@@ -192,11 +192,11 @@ config:
       # macie: http://localhost:4566
       # macie2: http://localhost:4566
       # managedblockchain: http://localhost:4566
-      # marketplacecatalog: http://localhost:4566
-      # marketplacecommerceanalytics: http://localhost:4566
-      # marketplaceentitlement: http://localhost:4566
-      # marketplaceentitlementservice: http://localhost:4566
-      # marketplacemetering: http://localhost:4566
+      - marketplacecatalog: http://localhost:4566
+      - marketplacecommerceanalytics: http://localhost:4566
+      - marketplaceentitlement: http://localhost:4566
+      - marketplaceentitlementservice: http://localhost:4566
+      - marketplacemetering: http://localhost:4566
       # mediaconnect: http://localhost:4566
       # mediaconvert: http://localhost:4566
       # medialive: http://localhost:4566
@@ -215,8 +215,8 @@ config:
       # mturk: http://localhost:4566
       # mwaa: http://localhost:4566
       # neptune: http://localhost:4566
-      # networkfirewall: http://localhost:4566
-      # networkmanager: http://localhost:4566
+      - networkfirewall: http://localhost:4566
+      - networkmanager: http://localhost:4566
       # nimblestudio: http://localhost:4566
       # opsworks: http://localhost:4566
       # opsworkscm: http://localhost:4566
@@ -237,22 +237,22 @@ config:
       # qldb: http://localhost:4566
       # qldbsession: http://localhost:4566
       # quicksight: http://localhost:4566
-      # ram: http://localhost:4566
-      # rds: http://localhost:4566
-      # rdsdata: http://localhost:4566
-      # rdsdataservice: http://localhost:4566
+      - ram: http://localhost:4566
+      - rds: http://localhost:4566
+      - rdsdata: http://localhost:4566
+      - rdsdataservice: http://localhost:4566
       # redshift: http://localhost:4566
       # redshiftdata: http://localhost:4566
       # rekognition: http://localhost:4566
-      # resourcegroups: http://localhost:4566
-      # resourcegroupstagging: http://localhost:4566
-      # resourcegroupstaggingapi: http://localhost:4566
-      # robomaker: http://localhost:4566
-      # route53: http://localhost:4566
-      # route53domains: http://localhost:4566
-      # route53recoverycontrolconfig: http://localhost:4566
-      # route53recoveryreadiness: http://localhost:4566
-      # route53resolver: http://localhost:4566
+      - resourcegroups: http://localhost:4566
+      - resourcegroupstagging: http://localhost:4566
+      - resourcegroupstaggingapi: http://localhost:4566
+      - robomaker: http://localhost:4566
+      - route53: http://localhost:4566
+      - route53domains: http://localhost:4566
+      - route53recoverycontrolconfig: http://localhost:4566
+      - route53recoveryreadiness: http://localhost:4566
+      - route53resolver: http://localhost:4566
       # sagemaker: http://localhost:4566
       # sagemakeredgemanager: http://localhost:4566
       # sagemakerfeaturestoreruntime: http://localhost:4566
