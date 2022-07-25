@@ -88,22 +88,22 @@ const Maindomain = new aws.route53.Record("Maindomain", {
   records: [listener.endpoint.hostname],
 });
 
-const mainServer = new aws.ec2.Instance("main-server", {
-  instanceType: "t2.micro",
-  tags: { name: "main-server" },
-  ami: ubuntu14.id,
-  vpcSecurityGroupIds: [WebSecurityGroup.id],
-});
+// const mainServer = new aws.ec2.Instance("main-server", {
+//   instanceType: "t2.micro",
+//   tags: { name: "main-server" },
+//   ami: ubuntu14.id,
+//   vpcSecurityGroupIds: [WebSecurityGroup.id],
+// });
 
-const secondaryServer = new aws.ec2.Instance("secondary-server", {
-  instanceType: "t2.micro",
-  tags: { name: "main-server" },
-  ami: ubuntu14.id,
-  vpcSecurityGroupIds: [WebSecurityGroup.id],
-});
+// const secondaryServer = new aws.ec2.Instance("secondary-server", {
+//   instanceType: "t2.micro",
+//   tags: { name: "main-server" },
+//   ami: ubuntu14.id,
+//   vpcSecurityGroupIds: [WebSecurityGroup.id],
+// });
 
-listener.attachTarget("main-server", mainServer);
-listener.attachTarget("secondary-server", secondaryServer);
+// listener.attachTarget("main-server", mainServer);
+// listener.attachTarget("secondary-server", secondaryServer);
 
 
 // const tgAttachment = new aws.lb.TargetGroupAttachment("", {

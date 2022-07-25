@@ -6,7 +6,6 @@ config:
   aws:skipRegionValidation: true
   aws:skipCredentialsValidation: true
   aws:skipRequestingAccountId: true
-  aws:skipMetadataApiCheck: true
   aws:endpoints:
       - s3: http://localhost:4566
       - s3control: http://localhost:4566
