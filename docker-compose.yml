@@ -17,7 +17,9 @@ services:
       - "127.0.0.1:443:443" # only required for Pro (LocalStack HTTPS Edge Proxy)
       - "127.0.0.1:4510-4559:4510-4559" # external service port range
       - "127.0.0.1:4566:4566" # LocalStack Edge Proxy
+      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
     environment:
+      - PORT_WEB_UI=8080
       - DEBUG=${DEBUG-}
       - DATA_DIR=${DATA_DIR-}
       - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}

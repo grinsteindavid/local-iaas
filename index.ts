@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
 
-const mainVPC = new aws.ec2.Vpc("main", {
+const mainVPC = new awsx.ec2.Vpc("main", {
   cidrBlock: "10.0.0.0/16",
 });
 
@@ -37,16 +37,16 @@ const ProtocolRules: {
   },
 };
 
-const devSecurityGroup = new aws.ec2.SecurityGroup("dev-ssh", {
-  ingress: [ProtocolRules.SSH],
-});
+// const devSecurityGroup = new aws.ec2.SecurityGroup("dev-ssh", {
+//   ingress: [ProtocolRules.SSH],
+// });
 
 const WebSecurityGroup = new aws.ec2.SecurityGroup("web-service", {
   ingress: [ProtocolRules.HTTP, ProtocolRules.HTTPS],
   egress: [ProtocolRules.HEALTH_CHECK],
 });
 
-const ubuntu14 = aws.getAmiOutput({
+const ubuntu14 = aws.ec2.getAmi({
   filters: [
     {
       name: "name",
@@ -58,35 +58,31 @@ const ubuntu14 = aws.getAmiOutput({
   owners: ["099720109477"], // Canonical
 });
 
-// const targetGroup = new aws.lb.TargetGroup("main-tg", {
-//   port: 80,
-//   protocol: "HTTP",
-//   vpcId: mainVPC.id,
-//   targetType: "instance",
-// });
-
 const loadBalancer = new awsx.lb.ApplicationLoadBalancer("web-traffic", {
   securityGroups: [WebSecurityGroup.id],
-  vpc: awsx.ec2.Vpc.getDefault(),
+  vpc: mainVPC,
+  external: true,
+  name: "web-traffic-lb",
 });
 
-const listener = loadBalancer.createListener("web-listener", { port: 80 });
+// const target = loadBalancer.createTargetGroup("web-target", { port: 80 });
+// const httpsListener = target.createListener("http-listener", { port: 80 });
 
 const primaryZone = new aws.route53.Zone("primary");
 
-const wwwSubdomain = new aws.route53.Record("wwwSubdomain", {
-  zoneId: primaryZone.id,
-  name: "www.example.com",
-  type: "A",
-  records: [listener.endpoint.hostname],
-});
+// const wwwSubdomain = new aws.route53.Record("wwwSubdomain", {
+//   zoneId: primaryZone.id,
+//   name: "www.example.com",
+//   type: "A",
+//   records: [listener.endpoint.hostname],
+// });
 
-const Maindomain = new aws.route53.Record("Maindomain", {
-  zoneId: primaryZone.id,
-  name: "example.com",
-  type: "A",
-  records: [listener.endpoint.hostname],
-});
+// const Maindomain = new aws.route53.Record("Maindomain", {
+//   zoneId: primaryZone.id,
+//   name: "example.com",
+//   type: "A",
+//   records: [listener.endpoint.hostname],
+// });
 
 // const mainServer = new aws.ec2.Instance("main-server", {
 //   instanceType: "t2.micro",
